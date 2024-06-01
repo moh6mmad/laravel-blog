@@ -1,0 +1,29 @@
+{
+    "name": "moh6mmad/laravel-blog",
+    "description": "This package allows you to add blog to your Laravel project",
+    "homepage": "https://lync.me/Mohammad",
+    "authors": [
+        {
+            "name": "Mohammad Hadizadeh",
+            "email": "hadizadeh66@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Moh6mmad\\LaravelBlog\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Moh6mmad\\LaravelBlog\\ServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "license": "MIT"
+}
