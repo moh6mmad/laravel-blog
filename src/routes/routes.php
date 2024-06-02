@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-$prefix = config('laravel-blog.route.blog_prefix');
-$pagePrefix = config('laravel-blog.route.page_prefix');
+$prefix = config('laravel-blog.route.blog_prefix', 'blog');
+$pagePrefix = config('laravel-blog.route.page_prefix', 'page');
 
 Route::get('/' . $prefix . '/tag/{tag}', [\Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController::class, 'tag'])->name('laravel-blog.tags');
 Route::get('/' . $prefix . '/category/{category}', [\Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController::class, 'category'])->name('laravel-blog.category');
