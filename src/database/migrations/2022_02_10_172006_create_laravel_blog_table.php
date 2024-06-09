@@ -25,11 +25,7 @@ class CreateLaravelBlogTable extends Migration
             $table->string('tags')->nullable();
             $table->integer('views')->default(0);
             $table->timestamps();
-        });
-
-        Schema::table('pages', function ($table) {
-            $table->dropPrimary('id');
-            $table->primary(['page_group', 'slug']);
+            $table->unique(['page_group', 'slug']);
         });
     }
 
