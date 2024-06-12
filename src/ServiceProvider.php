@@ -20,15 +20,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->app->make('Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController');
         $this->app->make('Moh6mmad\LaravelBlog\Http\Models\LaravelBlog');
-        $this->loadViewsFrom(__DIR__ . '/views', 'laravel-settings');
     }
 
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'larablog');
         $configPath = __DIR__ . '/config/laravel-blog.php';
         $this->publishes([$configPath => $this->getConfigPath()], 'config');
 
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         include __DIR__ . '/routes/routes.php';
+
     }
 }
