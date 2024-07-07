@@ -9,3 +9,4 @@ Route::get('/' . $prefix . '/tag/{tag}', [\Moh6mmad\LaravelBlog\Http\Controllers
 Route::get('/' . $prefix . '/category/{category}', [\Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController::class, 'category'])->name('laravel-blog.category');
 Route::get('/' . $prefix . '/{id}/{slug}', [\Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController::class, 'blogShow'])->name('laravel-blog.show');
 Route::get('/' . $pagePrefix . '/{slug}', [\Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController::class, 'show'])->name('laravel-blog.page.show');
+Route::get('/' . $prefix , [\Moh6mmad\LaravelBlog\Http\Controllers\LaravelBlogController::class, 'index'])->name('laravel-blog.blog.index');

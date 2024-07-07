@@ -9,15 +9,10 @@ use App\Http\Controllers\Controller;
 
 class LaravelBlogController extends Controller
 {
-    /**
-     * Display a listing of the blog pages.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function blogIndex(Request $request)
+    public function index(Request $request)
     {
         $pages = Page::where('page_group', 'blog')
-            ->where('content', '!=', '')
+            ->where('content', '')
             ->where('status', '1');
         if (! empty($tag)) {
             $pages = $pages->where('tags', 'like', '%'.$tag.'%');
@@ -32,7 +27,7 @@ class LaravelBlogController extends Controller
             'description' => 'All blog articles about marketing & SEO',
         ];
 
-        return view('blog.index', compact('pages', 'page'));
+        return view('larablog::index', compact('pages', 'page'));
     }
 
     public function tag($tag)
@@ -49,7 +44,7 @@ class LaravelBlogController extends Controller
             'description' => 'All blog articles with tag '.$tag,
         ];
 
-        return view('blog.index', compact('pages', 'posts', 'page'));
+        return view('larablog::index', compact('pages', 'posts', 'page'));
     }
 
     public function category($category)
@@ -66,13 +61,13 @@ class LaravelBlogController extends Controller
             'description' => 'All blog articles with category: '.$category,
         ];
 
-        return view('blog.index', compact('pages', 'posts', 'page'));
+        return view('larablog::index', compact('pages', 'posts', 'page'));
     }
     
     public function show($slug)
     {
         $page = Page::where('slug', $slug)->firstOrFail();
-        return view('larablog::page', compact('page'));
+        return view('larablog::larablog::page', compact('page'));
     }
     
     public function blogShow($id, $slug)
@@ -86,7 +81,7 @@ class LaravelBlogController extends Controller
         $tags = explode(',', $page->tags) ?? null;
         Page::where('id', $page->id)->update(['views' => $page->views + 1]);
 
-        return view('blog.show', compact('page', 'tags'));
+        return view('larablog::show', compact('page', 'tags'));
     }
 
     public function blogShowById(int $id)
@@ -94,14 +89,6 @@ class LaravelBlogController extends Controller
         $blog = Page::where('status', '1')->where('id', $id)->firstOrFail();
 
         return redirect(route('blog.show', $blog->slug));
-    }
-    
-    public function index(Request $request)
-    {
-        $data = Page::orderBy('id', 'DESC')->paginate(20);
-
-        return view('admin.pages.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
     public function getMediumAccountData(): string
@@ -141,7 +128,7 @@ class LaravelBlogController extends Controller
             ->where('page_group', 'blog')->where('status', '1')
             ->orderBy('id', 'desc')->limit(100)->get();
 
-        return response()->view('blog.sitemap', [
+        return response()->view('larablog::sitemap', [
             'pages' => $pages,
         ])->header('Content-Type', 'text/xml');
     }

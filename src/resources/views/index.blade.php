@@ -1,6 +1,6 @@
-@extends(config('laravel-blog.views.base'), ['title' => 'Blog' ,'description' => 'Blog','url' => route('laravel-blog.index'),])
+@extends(config('laravel-blog.views.base'), ['title' => 'Blog' ,'description' => 'Blog','url' => route('laravel-blog.blog.index'),])
 @section('content')
-<Div class="p-container">
+<div class="container">
     <div class="md:grid md:grid-cols-3 md:gap-4">
         @foreach ($pages as $index=>$post)
         @if ($index===0)
