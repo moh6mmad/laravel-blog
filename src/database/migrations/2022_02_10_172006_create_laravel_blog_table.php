@@ -21,6 +21,10 @@ class CreateLaravelBlogTable extends Migration
             $table->tinyText('title');
             $table->longText('content');
             $table->boolean('status')->default(true);
+            $table->boolean('generate_by_ai')->default(false);
+            $table->boolean('publish_on_medium')->default(false);
+            $table->string('medium_id')->nullable();
+            $table->boolean('is_featured')->default(false);
             $table->string('primary_image')->nullable();
             $table->string('tags')->nullable();
             $table->integer('views')->default(0);
