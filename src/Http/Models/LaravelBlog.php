@@ -32,6 +32,10 @@ class LaravelBlog extends Model
         'tags',
         'views',
         'short_description',
+        'publish_on_medium',
+        'medium_id',
+        'is_featured',
+        'generate_by_ai',
     ];
 
     public function scopeActive($query)
