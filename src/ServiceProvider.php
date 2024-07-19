@@ -3,7 +3,6 @@
 namespace Moh6mmad\LaravelBlog;
 
 use Moh6mmad\LaravelBlog\Commands\GenerateAiContent;
-use Moh6mmad\LaravelBlog\Console\InstallLaravelBlog;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -26,15 +25,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'larablog');
-        $configPath = __DIR__ . '/config/laravel-blog.php';
+        $configPath = __DIR__.'/config/laravel-blog.php';
         $this->publishes([$configPath => $this->getConfigPath()], 'config');
 
         $this->commands([
             GenerateAiContent::class,
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-        include __DIR__ . '/routes/routes.php';
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        include __DIR__.'/routes/routes.php';
 
     }
 }

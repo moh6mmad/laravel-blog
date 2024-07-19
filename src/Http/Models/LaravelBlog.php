@@ -4,15 +4,16 @@ namespace Moh6mmad\LaravelBlog\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Config;
 
 class LaravelBlog extends Model
 {
     use HasFactory;
 
     protected $dbName;
+
     protected $table;
 
     public function __construct(array $attributes = [])
@@ -21,6 +22,7 @@ class LaravelBlog extends Model
         $this->dbName = Config::get('laravel-blog.database.table', 'laravel_blog');
         $this->table = $this->dbName;
     }
+
     protected $fillable = [
         'page_group',
         'slug',
@@ -38,6 +40,14 @@ class LaravelBlog extends Model
         'generate_by_ai',
     ];
 
+    protected $casts = [
+        'publish_on_medium' => 'boolean',
+    ];
+
+    protected $appends = [
+        'estimate_reading',
+    ];
+
     public function scopeActive($query)
     {
         return $query->where('status', 1);
@@ -46,6 +56,13 @@ class LaravelBlog extends Model
     public function scopeBlogPosts($query)
     {
         return $query->where('page_group', 'blog');
+    }
+
+    public function getEstimateReadingAttribute()
+    {
+        $word = str_word_count(strip_tags($this->content));
+        $m = floor($word / 200) + 1;
+      return $m.' minute'.($m == 1 ? '' : 's');
     }
 
     public function getPrimaryImageUrlAttribute()

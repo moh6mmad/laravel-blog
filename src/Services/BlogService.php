@@ -18,7 +18,7 @@ class BlogService
 
     public function generateContentByOpenAi(?Page $page, $model = 'gpt-4-turbo', $role = 'user')
     {
-        if (empty(config('laravel-blog.openai.api_key')) || !$page->generate_by_ai) {
+        if (empty(config('laravel-blog.openai.api_key')) || ! $page->generate_by_ai) {
             return;
         }
 
@@ -26,7 +26,7 @@ class BlogService
         $result = $client->chat()->create([
             'model' => $model,
             'messages' => [
-                ['role' => $role, 'content' => config('laravel-blog.openai.prompt') . $page->title],
+                ['role' => $role, 'content' => config('laravel-blog.openai.prompt').$page->title],
             ],
         ]);
 
@@ -39,21 +39,20 @@ class BlogService
     public function publishOnMedium(Page $page)
     {
         $accountId = config('laravel-blog.medium.account_id') ?? $this->getMediumAccountData();
-        $page->content = preg_replace('/(?<!\S)#([0-9a-zA-Z]+)/', '<a href="' . env('APP_URL') . '/blog/tag/$1">#$1</a>', $page->content);
+        $page->content = preg_replace('/(?<!\S)#([0-9a-zA-Z]+)/', '<a href="'.env('APP_URL').'/blog/tag/$1">#$1</a>', $page->content);
 
         $response = Http::withToken(config('laravel-blog.medium.token'))
-            ->post('https://api.medium.com/v1/users/' . $accountId . '/posts', [
+            ->post('https://api.medium.com/v1/users/'.$accountId.'/posts', [
                 'title' => $page->title,
                 'contentFormat' => 'html',
                 'content' => $page->content,
-                'canonicalUrl' => env('APP_URL') . '/' . config('laravel-blog.route.blog_prefix', 'blog') . '/' . $page->id . '/' . $page->slug,
+                'canonicalUrl' => env('APP_URL').'/'.config('laravel-blog.route.blog_prefix', 'blog').'/'.$page->id.'/'.$page->slug,
                 'tags' => explode(',', $page->tags),
                 'publishStatus' => 'public',
             ]);
 
         return $response->json();
     }
-
 
     public function generateSitemap(int $limit = 100): array
     {

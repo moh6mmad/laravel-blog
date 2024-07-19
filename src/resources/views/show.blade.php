@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <img width="100%" height="100%" class="max-w-2xl w-full flex-1 bg-gray-100 mb-4 mx-auto md:mb-12 min-h-[300px] block img-fluid"
+        <img width="100%" height="100%" class="bg-gray-100 max-w-2xl w-full flex-1 bg-gray-100 mb-4 mx-auto md:mb-12 min-h-[300px] block img-fluid"
             src="{{ $page->primary_image_url }}" alt="{{$page->title}}">
         <div class="max-w-2xl mx-auto px-2 md:px-0 py-4">
             {!! $page->content !!}
