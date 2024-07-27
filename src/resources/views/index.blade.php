@@ -6,16 +6,16 @@
     <div class="md:flex col-span-3">
         <a href="{{route('laravel-blog.show', ['id'=>$post->id, 'slug'=>$post->slug])}}">
             <Div class="flex-1 md:pl-8  ">
-                <h1 class="md:max-w-md text-2xl font-bold text-slate-900 dark:text-slate-200 md:text-3xl "> {{$post->title}}
+                <h1 class="larablog-index-title "> {{$post->title}}
                 </h1>
-                <div class="mt-8 capitalize text-sm flex space-x-2 dark:text-slate-400">
+                <div class="larablog-index-excerpt ">
                     <div class="bg-black uppercase px-2 md:px-5 text-white"> {{$post->category_id}} </div>
                     <div class="px-1 md:px-4"> {{$post->created_at->diffForHumans()}}</div>
                 </div>
             </div>
         </a>
         <div class="flex-1">
-            <img class="max-w-full w-full flex-1 bg-gray-100 mb-4 block mx-auto md:mb-12 min-h-[300px] img-fluid"
+            <img class="larablog-index-image "
                 src="{{ $post->primary_image_url }}" alt="{{$post->title}}">
         </div>
     </div>

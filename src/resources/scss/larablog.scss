@@ -1,0 +1,35 @@
+.larablog-widget-image {
+    @apply bg-slate-100 mb-6 relative h-48 w-full block bg-cover bg-center
+}
+
+.larablog-widget-excerpt {
+    @apply py-2 h-32;
+}
+
+.larablog-widget-title {
+    @apply min-h-12 font-medium tracking-tight py-1;
+}
+
+.larablog-index-image {
+    @apply max-w-full w-full flex-1 bg-gray-100 mb-4 block mx-auto md:mb-12 min-h-[300px];
+}
+
+.larablog-index-title {
+    @apply md:max-w-md text-2xl font-bold text-slate-900 dark:text-slate-200 md:text-3xl;
+}
+
+.larablog-index-excerpt {
+    @apply mt-8 capitalize text-sm flex space-x-2 dark:text-slate-400;
+}
+
+.larablog-show-image {
+    @apply bg-gray-100 max-w-2xl w-full flex-1 bg-gray-100 mb-4 mx-auto md:mb-12 min-h-[300px] block;
+}
+
+.larablog-show-title {
+    @apply text-center text-2xl font-bold text-slate-900 dark:text-slate-200 md:text-3xl;
+}
+
+.larablog-show-container {
+    @apply container relative px-4 md:px-0;
+}

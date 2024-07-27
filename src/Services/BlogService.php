@@ -16,11 +16,13 @@ class BlogService
         return $response->json()['data']['id'];
     }
 
-    public function generateContentByOpenAi(?Page $page, $model = 'gpt-4-turbo', $role = 'user')
+    public function generateContentByOpenAi(?Page $page, $role = 'user')
     {
-        if (empty(config('laravel-blog.openai.api_key')) || ! $page->generate_by_ai) {
+        if (empty(config('laravel-blog.openai.api_key')) || empty($page) || ! $page->generate_by_ai) {
             return;
         }
+
+        $model = config('laravel-blog.openai.model') ?? 'gpt-3.5-turbo';
 
         $client = OpenAI::client(config('laravel-blog.openai.api_key'));
         $result = $client->chat()->create([
